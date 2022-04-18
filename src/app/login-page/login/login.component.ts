@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AppComponent, User} from "../../app.component";
-import {AddValidators} from "../../shared/app.validators";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AddValidators } from "../../shared/app.validators";
+import { UserService } from "../../shared/user.service";
 
 @Component({
   selector: 'app-login',
@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
     return this.formLogin.controls.password;
   }
 
-  constructor(private _fb: FormBuilder) {
-  }
+  constructor(
+    private _fb: FormBuilder,
+    public _userService: UserService
+  )
+  { }
 
   public ngOnInit(): void {
     this._createForm();
@@ -49,11 +52,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const user: User = {
-      login: this.formLogin.value.login,
-      password: this.formLogin.value.password
-    }
-
-    AppComponent.users.push(user);
+    this._userService.createUser(this.formLogin.value);
   }
 }

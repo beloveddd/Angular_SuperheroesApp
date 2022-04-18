@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface User {
-  login: string,
-  password: any,
-  userName?: string
-}
+import { User } from "./shared/app.interfaces";
 
 @Component({
   selector: 'app-root',
@@ -13,5 +8,4 @@ export interface User {
 })
 export class AppComponent {
   public title: string = 'superHeroesApp';
-  public static users: Array<User> = [];
 }

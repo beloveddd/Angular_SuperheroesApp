@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AppComponent, User} from "../../app.component";
-import {AddValidators} from "../../shared/app.validators";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AddValidators } from "../../shared/app.validators";
+import { UserService } from "../../shared/user.service";
 
 @Component({
   selector: 'app-create-user',
@@ -21,7 +21,11 @@ export class CreateUserComponent implements OnInit {
     return this.formCreate.controls.password;
   }
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(
+    private _fb: FormBuilder,
+    public _userService: UserService
+  )
+  { }
 
   public ngOnInit(): void {
     this._createForm();
@@ -56,12 +60,6 @@ export class CreateUserComponent implements OnInit {
       return;
     }
 
-    const user: User = {
-      userName: this.formCreate.value.userName,
-      login: this.formCreate.value.login,
-      password: this.formCreate.value.password
-    }
-
-    AppComponent.users.push(user);
+    this._userService.createUser(this.formCreate.value);
   }
 }
