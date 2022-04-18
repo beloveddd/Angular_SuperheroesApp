@@ -1,0 +1,38 @@
+<form class="form" [formGroup]="formLogin" (ngSubmit)="submit()">
+  <h2>Login</h2>
+
+  <div class="input">
+    <label>Login</label>
+    <input type="email"
+           placeholder="Enter your email"
+           formControlName="login"
+           [ngClass]="{invalid: loginControl.invalid && loginControl.touched}">
+
+    <div class="errors" *ngIf="formLogin.invalid && (loginControl.dirty || loginControl.touched)">
+      <small *ngIf="loginControl.errors?.required">Empty email</small>
+      <small *ngIf="loginControl.errors?.email || loginControl.errors?.invalidEmail">Invalid email</small>
+    </div>
+  </div>
+
+  <div class="input">
+    <label>Password</label>
+    <input type="password"
+           placeholder="Enter your password"
+           formControlName="password"
+           [ngClass]="{invalid: passwordControl.invalid && passwordControl.touched}">
+
+    <div class="errors" *ngIf="formLogin.invalid && (passwordControl.dirty || passwordControl.touched)">
+      <small *ngIf="passwordControl.errors?.required">Empty password</small>
+      <small *ngIf="passwordControl.errors?.invalidPassword">Invalid password</small>
+      <small *ngIf="passwordControl.errors?.minlength">
+        Required length - {{passwordControl.errors?.minlength.requiredLength}}.
+        Now it's {{passwordControl.errors?.minlength.actualLength}}</small>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button class="btn" type="submit" [disabled]="formLogin.invalid">Log In</button>
+    <button class="btn btn-create" type="button" routerLink="/create-user">Create new account</button>
+  </div>
+
+</form>

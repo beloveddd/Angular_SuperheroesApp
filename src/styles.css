@@ -1,1 +1,111 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Chivo:ital,wght@0,300;0,400;0,900;1,300;1,400;1,900&display=swap');
+
+body {
+  background: url("images/MarvelCharacterBlock.png") no-repeat fixed center;
+  background-size: cover;
+  margin: 0;
+  /*font-family: 'Bangers', cursive;*/
+  font-family: 'Chivo', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #131313;
+}
+
+.title {
+  font-family: 'Bangers', cursive;
+  color: rgba(243, 54, 54, 0.8);
+  background-color: rgba(255, 216, 0, 0.8);
+  text-align: center;
+  padding: 8px;
+}
+
+.form {
+  width: 400px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.form label {
+  margin: 3px 0;
+}
+
+.form h2 {
+  margin-top: 5px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 300px;
+}
+
+.input input {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.input input::placeholder {
+  font-family: 'Chivo', sans-serif;
+  font-style: italic;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: rgba(255, 216, 0, 0.8);
+  width: 100px;
+  height: 30px;
+  padding: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Chivo', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #131313;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  color: rgba(19, 19, 19, 0.8);
+}
+
+.btn:disabled {
+  background-color: rgba(128, 128, 128, 0.8);
+}
+
+.btn-create {
+  background-color: transparent;
+  border: none;
+  width: 200px;
+}
+
+.btn-back {
+  background-color: rgba(243, 54, 54, 0.8);
+}
+
+.errors {
+  color: red;
+  font-style: normal;
+  font-weight: lighter;
+  padding-left: 7px;
+}
+
+.invalid {
+  outline: 1px solid red;
+}

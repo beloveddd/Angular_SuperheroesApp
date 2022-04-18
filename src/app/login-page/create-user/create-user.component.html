@@ -1,0 +1,51 @@
+<form class="form" [formGroup]="formCreate" (ngSubmit)="submit()">
+  <h2>Sign in</h2>
+
+  <div class="input">
+    <label>User name</label>
+    <input type="text"
+           placeholder="Enter your user name"
+           formControlName="userName"
+           [ngClass]="{invalid: userNameControl.invalid && userNameControl.touched}">
+
+    <div class="errors" *ngIf="formCreate.invalid && (formCreate.controls.userName.dirty || formCreate.controls.userName.touched)">
+      <small *ngIf="userNameControl.errors?.required">Empty user name</small>
+      <small *ngIf="userNameControl.errors?.email">Invalid user name</small>
+    </div>
+  </div>
+
+  <div class="input">
+    <label>Login</label>
+    <input type="email"
+           placeholder="Enter your email"
+           formControlName="login"
+           [ngClass]="{invalid: loginControl.invalid && loginControl.touched}">
+
+    <div class="errors" *ngIf="formCreate.invalid && (loginControl.dirty || loginControl.touched)">
+      <small *ngIf="loginControl.errors?.required">Empty email</small>
+      <small *ngIf="loginControl.errors?.email">Invalid email</small>
+      <small *ngIf="loginControl.errors?.notUniqueEmail">Not unique email</small>
+    </div>
+  </div>
+
+  <div class="input">
+    <label>Password</label>
+    <input type="password"
+           placeholder="Enter your password"
+           formControlName="password"
+           [ngClass]="{invalid: passwordControl.invalid && passwordControl.touched}">
+
+    <div class="errors" *ngIf="formCreate.invalid && (passwordControl.dirty || passwordControl.touched)">
+      <small *ngIf="passwordControl.errors?.required">Empty password</small>
+      <small *ngIf="passwordControl.errors?.minlength">
+        Required length - {{passwordControl.errors?.minlength.requiredLength}}.
+        Now it's {{passwordControl.errors?.minlength.actualLength}}</small>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button class="btn" type="submit" [disabled]="formCreate.invalid">Create</button>
+    <button class="btn btn-back" type="button" routerLink="/login">Log in</button>
+  </div>
+
+</form>
