@@ -1,6 +1,6 @@
 import { FormControl, ValidationErrors } from "@angular/forms";
 import { User } from "./app.interfaces";
-import { UserService } from "./user.service";
+import { UserService } from "./services/user.service";
 
 export class AddValidators {
   public static regEmail: RegExp = new RegExp('^([a-zA-Z]*\\.?){1,3}[^\\.]*@([a-zA-Z]{1,5})(.com|.org|.net|.co|.us)$');

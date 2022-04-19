@@ -1,5 +1,7 @@
 export interface User {
   login: string,
   password: any,
-  userName?: string
+  userName?: string,
+  token?: Date,
+  lifetime?: number | undefined,
 }

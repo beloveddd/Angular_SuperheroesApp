@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AddValidators } from "../../shared/app.validators";
-import { UserService } from "../../shared/user.service";
+import { UserService } from "../../shared/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-user',
@@ -23,7 +24,8 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    public _userService: UserService
+    private _userService: UserService,
+    private _router: Router
   )
   { }
 
@@ -56,10 +58,9 @@ export class CreateUserComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.formCreate.invalid) {
-      return;
-    }
+    if (this.formCreate.invalid) return;
 
     this._userService.createUser(this.formCreate.value);
+    this._router.navigate(['/login']);
   }
 }

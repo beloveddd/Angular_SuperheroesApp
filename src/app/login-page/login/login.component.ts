@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AddValidators } from "../../shared/app.validators";
-import { UserService } from "../../shared/user.service";
+import { UserService } from "../../shared/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { UserService } from "../../shared/user.service";
 })
 export class LoginComponent implements OnInit {
   public formLogin!: FormGroup;
+  public isAuth: boolean = true;
+  public isLogged: boolean = false;
 
   public get loginControl(): AbstractControl {
     return this.formLogin.controls.login;
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    public _userService: UserService
+    private _userService: UserService,
+    private _router: Router
   )
   { }
 
@@ -45,13 +49,21 @@ export class LoginComponent implements OnInit {
         ]
       ]
     });
+
+    this.isLogged = UserService.isLogged;
   }
 
   public submit(): void {
-    if (this.formLogin.invalid) {
-      return;
+    if (this.formLogin.invalid) return;
+
+    this.isLogged = true;
+    this._userService.login(this.formLogin.value);
+
+    if (!this._userService.login(this.formLogin.value)) {
+      this.isAuth = false;
     }
 
-    this._userService.createUser(this.formLogin.value);
+    this.formLogin.reset();
+    this._router.navigate(['/']);
   }
 }
