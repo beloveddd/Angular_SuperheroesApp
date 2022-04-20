@@ -1,14 +1,17 @@
-import { User } from "../app.interfaces";
 import { Injectable } from "@angular/core";
 
-@Injectable()
+import { User } from "../app.interfaces";
+
+@Injectable({
+  providedIn: 'root'
+  })
 export class UserService {
-  public static usersKey: string = 'users';
-  public static currentUserKey: string = 'currentUser';
-  public static sessionTime: number = 3600000;
-  public static users: User[] = localStorage.getItem(UserService.usersKey) ? JSON.parse(localStorage.getItem(UserService.usersKey)!) : [];
-  public static currentUser: User | undefined = localStorage.getItem(UserService.currentUserKey) ? JSON.parse(localStorage.getItem(UserService.currentUserKey)!) : {};
-  public static isLogged: boolean = true;
+  public usersKey: string = 'users';
+  public currentUserKey: string = 'currentUser';
+  public sessionTime: number = 3600000;
+  public users: User[] = localStorage.getItem(this.usersKey) ? JSON.parse(localStorage.getItem(this.usersKey)!) : [];
+  public currentUser: User | undefined = localStorage.getItem(this.currentUserKey) ? JSON.parse(localStorage.getItem(this.currentUserKey)!) : {};
+  public isLogged: boolean = true;
 
   public createUser(formLoginValue: Record<string, string>): void {
     const user: User = {
@@ -17,33 +20,33 @@ export class UserService {
       userName: formLoginValue.userName,
     }
 
-    UserService.users?.push(user);
+    this.users?.push(user);
     this.setUsersToLocalStorage(user);
   }
 
   public setUsersToLocalStorage(user: User): void {
-    localStorage.setItem(UserService.usersKey, JSON.stringify(UserService.users));
+    localStorage.setItem(this.usersKey, JSON.stringify(this.users));
   }
 
   public login(formLoginValue: Record<string, string>): boolean {
-    const loginUniqueness: boolean = UserService.users.some( (elem: User) => elem.login === formLoginValue.login );
-    const passwordMatch: boolean = UserService.users.some( (elem: User) => elem.password === formLoginValue.password );
+    const loginUniqueness: boolean = this.users.some( (elem: User) => elem.login === formLoginValue.login );
+    const passwordMatch: boolean = this.users.some( (elem: User) => elem.password === formLoginValue.password );
 
     if (!loginUniqueness || !passwordMatch) return false;
 
-    UserService.currentUser = UserService.users.find( (elem: User) => elem.login === formLoginValue.login );
-    UserService.currentUser!.token = new Date();
-    UserService.currentUser!.lifetime = new Date().getTime() + UserService.sessionTime;
-    localStorage.setItem(UserService.currentUserKey, JSON.stringify(UserService.currentUser));
+    this.currentUser = this.users.find( (elem: User) => elem.login === formLoginValue.login );
+    this.currentUser!.token = new Date();
+    this.currentUser!.lifetime = new Date().getTime() + this.sessionTime;
+    localStorage.setItem(this.currentUserKey, JSON.stringify(this.currentUser));
     return true;
   }
 
-  public static checkAuth(): boolean | void {
-    if ( UserService.currentUser?.lifetime! && (UserService.currentUser?.lifetime! > new Date().getTime()) ) return false;
+  public checkAuth(): boolean | void {
+    if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) return false;
 
-    if (UserService.currentUser?.lifetime!) {
-      UserService.isLogged = false;
-      localStorage.removeItem(UserService.currentUserKey);
+    if (this.currentUser?.lifetime!) {
+      this.isLogged = false;
+      localStorage.removeItem(this.currentUserKey);
       return true;
     }
   }

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
 import { AddValidators } from "../../shared/app.validators";
 import { UserService } from "../../shared/services/user.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  styleUrls: ['./create-user.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUserComponent implements OnInit {
   public formCreate!: FormGroup;
@@ -44,7 +46,7 @@ export class CreateUserComponent implements OnInit {
       login: [null, [
         Validators.required,
         Validators.email,
-        AddValidators.checkNewEmail
+        AddValidators.checkNewEmail(this._userService.users)
         ]
       ],
       password: [

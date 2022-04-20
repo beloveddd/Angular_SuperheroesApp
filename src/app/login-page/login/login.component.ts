@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
 import { AddValidators } from "../../shared/app.validators";
 import { UserService } from "../../shared/services/user.service";
-import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   public formLogin!: FormGroup;
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
       ]
     });
 
-    this.isLogged = UserService.isLogged;
+    this.isLogged = this._userService.isLogged;
   }
 
   public submit(): void {
