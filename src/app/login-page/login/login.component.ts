@@ -57,7 +57,9 @@ export class LoginComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.formLogin.invalid) return;
+    if (this.formLogin.invalid) {
+      return;
+    }
 
     this.isLogged = true;
     this._userService.login(this.formLogin.value);

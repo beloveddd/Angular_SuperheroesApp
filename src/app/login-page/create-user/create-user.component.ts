@@ -60,7 +60,9 @@ export class CreateUserComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.formCreate.invalid) return;
+    if (this.formCreate.invalid) {
+      return;
+    }
 
     this._userService.createUser(this.formCreate.value);
     this._router.navigate(['/login']);

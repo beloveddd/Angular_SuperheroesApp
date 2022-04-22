@@ -32,7 +32,9 @@ export class UserService {
     const loginUniqueness: boolean = this.users.some( (elem: User) => elem.login === formLoginValue.login );
     const passwordMatch: boolean = this.users.some( (elem: User) => elem.password === formLoginValue.password );
 
-    if (!loginUniqueness || !passwordMatch) return false;
+    if (!loginUniqueness || !passwordMatch) {
+      return false;
+    }
 
     this.currentUser = this.users.find( (elem: User) => elem.login === formLoginValue.login );
     this.currentUser!.token = new Date();
@@ -42,7 +44,9 @@ export class UserService {
   }
 
   public checkAuth(): boolean | void {
-    if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) return false;
+    if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) {
+      return false;
+    }
 
     if (this.currentUser?.lifetime!) {
       this.isLogged = false;

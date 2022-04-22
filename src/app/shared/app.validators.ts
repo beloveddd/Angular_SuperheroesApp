@@ -29,7 +29,9 @@ export class AddValidators {
   }
 
   private static _checkRegExp(control: FormControl, re: RegExp): ValidationErrors | null {
-    if (!control.value) return null;
+    if (!control.value) {
+      return null;
+    }
 
     if (!control.value.match(re)) {
       switch (true) {

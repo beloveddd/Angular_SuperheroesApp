@@ -22,7 +22,9 @@ export class AppComponent implements OnInit {
   }
 
   public checkAuth(): void {
-    if (!this._userService.checkAuth()) return;
+    if (!this._userService.checkAuth()) {
+      return;
+    }
 
     this._router.navigate(['/login']);
   }
