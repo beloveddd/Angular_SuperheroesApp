@@ -100,12 +100,12 @@ body {
 }
 
 .errors {
-  color: red;
+  color: rgba(243, 54, 54, 0.8);
   font-style: normal;
-  font-weight: lighter;
+  font-weight: 600;
   padding-left: 7px;
 }
 
 .invalid {
-  outline: 1px solid red;
+  outline: 1px solid rgba(243, 54, 54, 0.8);
 }

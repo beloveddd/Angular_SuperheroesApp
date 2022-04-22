@@ -35,6 +35,14 @@
 
   </div>
 
+  <div *ngIf="!isAuth" class="errors" >
+    <small>Wrong email or password</small>
+  </div>
+
+  <div *ngIf="!isLogged" class="errors" >
+    <small>Your current session has expired. Please login again to continue using this app.</small>
+  </div>
+
   <div class="btns">
     <button class="btn" type="submit" [disabled]="formLogin.invalid">Log In</button>
     <button class="btn btn-create" type="button" routerLink="/create-user">Create new account</button>
