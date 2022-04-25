@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { User } from "../app.interfaces";
+import { HeroSelectionService } from "./hero-selecton.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class UserService {
   public users: User[] = localStorage.getItem(this.usersKey) ? JSON.parse(localStorage.getItem(this.usersKey)!) : [];
   public currentUser: User | undefined = localStorage.getItem(this.currentUserKey) ? JSON.parse(localStorage.getItem(this.currentUserKey)!) : {};
   public isLogged: boolean = true;
+
+  constructor(private _heroSelectionService: HeroSelectionService) { }
 
   public createUser(formLoginValue: Record<string, string>): void {
     const user: User = {
@@ -43,7 +46,7 @@ export class UserService {
     return true;
   }
 
-  public checkAuth(): boolean | void {
+  public checkAuth(): boolean {
     if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) {
       return false;
     }
@@ -51,7 +54,12 @@ export class UserService {
     if (this.currentUser?.lifetime!) {
       this.isLogged = false;
       localStorage.removeItem(this.currentUserKey);
+      localStorage.removeItem(this._heroSelectionService.selectedHeroKey);
+      localStorage.removeItem(this._heroSelectionService.ownedHeroesKey);
+      localStorage.removeItem(this._heroSelectionService.recentSearchesKey);
       return true;
     }
+
+    return true;
   }
 }

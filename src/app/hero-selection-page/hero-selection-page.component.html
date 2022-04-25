@@ -1,0 +1,42 @@
+<div class="heroSelectionPage">
+  <div class="searchContainer">
+    <form [formGroup]="formHero" (ngSubmit)="submit()">
+      <button class="btn btn-alphabet" (click)="toggleAlphabet()">a</button>
+      <input
+        class ="searchInput"
+        type="text"
+        placeholder="Search heroes"
+        formControlName="searchInput"
+        [class.invalid]="searchInputControl.touched && searchInputControl.dirty && searchInputControl.invalid"
+      >
+
+      <div *ngIf="formHero.invalid && searchInputControl.dirty && searchInputControl.touched">
+        <small *ngIf="searchInputControl.errors?.invalidInputValue" class="errors">Enter only letters without wrapping spaces</small>
+        <small *ngIf="searchInputControl.errors?.required" class="errors">Empty search value</small>
+      </div>
+
+      <button class="btn-search" type="submit" [disabled]="formHero.invalid"><i class="searchIcon" class="fa-solid fa-magnifying-glass search"></i></button>
+    </form>
+  </div>
+
+  <div class="recentSearches">
+    <div *ngFor="let recentSearch of recentSearches" class="recentSearch" >
+      {{recentSearch}}
+    </div>
+  </div>
+
+  <div id="lettersContainer"></div>
+
+  <div *ngIf="results$ | async as foundedHeroes" class="heroesList">
+    <p class="results">Results: {{foundedHeroes.length}}</p>
+
+    <app-hero-item
+      *ngFor="let heroItem of foundedHeroes"
+      [heroItem] = "heroItem"
+    >
+    </app-hero-item>
+
+  </div>
+
+</div>
+

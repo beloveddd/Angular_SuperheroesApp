@@ -1,0 +1,68 @@
+.heroSelectionPage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.results {
+  border: 1px solid rgba(19, 19, 19, 0.8);
+  background-color: rgba(255, 216, 0, 0.8);
+  margin: 15px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.searchInput {
+  padding: 7px;
+  margin: 0 5px;
+  height: 20px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+.searchInput::placeholder {
+  font-family: 'Chivo', sans-serif;
+  font-style: italic;
+}
+
+.search {
+  position: absolute;
+  left: 91%;
+  top: 33%;
+  cursor: pointer;
+}
+
+.btn-search {
+  border: none;
+  background-color: transparent;
+}
+
+.btn-alphabet {
+  border-radius: 50px;
+  width: 35px;
+  height: 35px;
+  text-transform: uppercase;
+}
+.recentSearches {
+  width: 21rem;
+  margin: 10px auto;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.recentSearch {
+  display: inline-block;
+  border: 2px solid rgb(58, 58, 58);
+  border-radius: 10px;
+  padding: 3px;
+  margin: 5px;
+  cursor: pointer;
+  font-style: normal;
+  background-color: rgba(255, 216, 0, 0.8);
+
+}
+
