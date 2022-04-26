@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -10,13 +10,14 @@ import { HeroItem } from "../shared/app.interfaces";
 @Component({
   selector: 'app-hero-selection-page',
   templateUrl: './hero-selection-page.component.html',
-  styleUrls: ['./hero-selection-page.component.css']
+  styleUrls: ['./hero-selection-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroSelectionPageComponent implements OnInit {
   public formHero!: FormGroup;
-  public isToggled: boolean = false;
   public results$!: Observable<any>;
   public recentSearches!: string[];
+  public isToggled!: boolean;
 
   public get searchInputControl(): AbstractControl {
     return this.formHero.controls.searchInput;
@@ -72,8 +73,7 @@ export class HeroSelectionPageComponent implements OnInit {
     this.initRecentSearches();
   }
 
-  public toggleAlphabet(): void {
-    this.isToggled = !this.isToggled;
-    this.isToggled ? this._heroSectionService.createAlphabet() : this._heroSectionService.deleteAlphabet();
+  public handleChange(isToggled: boolean): void {
+    this.isToggled = isToggled;
   }
 }

@@ -9,7 +9,7 @@ import { LoginComponent } from './login-page/login/login.component';
 import { CreateUserComponent } from './login-page/create-user/create-user.component';
 import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
 import { HeroItemComponent } from './hero-selection-page/hero-item/hero-item.component';
-
+import { AlphabetComponent } from "./hero-selection-page/alphabet/alphabet.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { HeroItemComponent } from './hero-selection-page/hero-item/hero-item.com
     LoginComponent,
     CreateUserComponent,
     HeroSelectionPageComponent,
-    HeroItemComponent
+    HeroItemComponent,
+    AlphabetComponent
   ],
   imports: [
     BrowserModule,
