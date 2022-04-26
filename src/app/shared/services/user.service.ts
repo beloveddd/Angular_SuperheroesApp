@@ -47,7 +47,9 @@ export class UserService {
   }
 
   public checkAuth(): boolean {
-    if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) {
+    const expiredSession: number | boolean = this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime())
+
+    if (expiredSession) {
       return false;
     }
 
@@ -57,7 +59,6 @@ export class UserService {
       localStorage.removeItem(this._heroSelectionService.selectedHeroKey);
       localStorage.removeItem(this._heroSelectionService.ownedHeroesKey);
       localStorage.removeItem(this._heroSelectionService.recentSearchesKey);
-      return true;
     }
 
     return true;
