@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
 import { HeroItem } from "../../shared/app.interfaces";
 
@@ -14,11 +15,9 @@ export class AlphabetComponent {
 
   public arrAlphabetEN: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   public newLetterClass: string = 'newLetter';
-  public targetClass: string = 'BUTTON';
   public circleValue: string | null = this.arrAlphabetEN[0];
   public isToggled: boolean = false;
   public lettersContainer!: HTMLElement | null;
-
 
   constructor(
     private _heroSelectionService: HeroSelectionService,
@@ -30,24 +29,16 @@ export class AlphabetComponent {
     this.onChange.emit(this.isToggled);
   }
 
-  public searchByLetter(event: Event): void {
-    const evTarget: HTMLElement = event.target as HTMLElement;
-
-    if (evTarget.tagName !== this.targetClass) {
-      return;
-    }
-
-    const buttonValue: string | null = evTarget.textContent;
-
-    this.circleValue = buttonValue;
-    this._heroSelectionService.searchHeroes(buttonValue)
+  public searchByLetter(letter: string): void {
+    this.circleValue = letter;
+    this._heroSelectionService.searchHeroes(letter)
       .subscribe( (response: HeroItem[]) => {
         this._heroSelectionService.foundedHeroes = response;
         this._cd.markForCheck();
       });
-    this._heroSelectionService.createRecentSearches(buttonValue);
+    this._heroSelectionService.createRecentSearches(letter);
     this.toggleAlphabet();
-    this.onClickButton.emit(buttonValue);
+    this.onClickButton.emit(letter);
   }
 
   public trackByFn(index: number): number {
