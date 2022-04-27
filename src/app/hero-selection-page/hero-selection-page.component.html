@@ -27,11 +27,11 @@
 
   <div id="lettersContainer"></div>
 
-  <div *ngIf="results$ | async as foundedHeroes" class="heroesList">
-    <p class="results">Results: {{foundedHeroes.length}}</p>
+  <div *ngIf="results.length" class="heroesList">
+    <p class="results">Results: {{results.length}}</p>
 
     <app-hero-item
-      *ngFor="let heroItem of foundedHeroes; trackBy: trackByFn"
+      *ngFor="let heroItem of results; trackBy: trackByFn"
       [heroItem] = "heroItem"
     >
     </app-hero-item>

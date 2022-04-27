@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 
-import { HeroItem } from "../app.interfaces";
+import { HeroItem, Response } from "../app.interfaces";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -24,9 +24,9 @@ export class HeroSelectionService {
   constructor(private _http: HttpClient) { }
 
   public searchHeroes(searchValue: string): Observable<HeroItem[]> {
-      return this._http.get(this.urlAPI + searchValue)
+      return this._http.get<Response>(this.urlAPI + searchValue)
         .pipe(
-          map( (response: Record<string, any>) => {
+          map( (response: Response) => {
             const data: HeroItem[] = response.results.filter( (elem: HeroItem) => elem.powerstats.power !== 'null');
 
             return data;

@@ -12,3 +12,7 @@ export interface HeroItem {
   name: string,
   powerstats: Record<string, string>
 }
+
+export interface Response {
+  results: HeroItem[]
+}

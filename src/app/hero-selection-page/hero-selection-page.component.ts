@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { HeroSelectionService } from "../shared/services/hero-selecton.service";
@@ -29,8 +29,9 @@ export class HeroSelectionPageComponent implements OnInit {
   constructor(
     private _heroSectionService: HeroSelectionService,
     private _http: HttpClient,
-    private _fb: FormBuilder
-  ) { }
+    private _fb: FormBuilder,
+    private _cd: ChangeDetectorRef
+    ) { }
 
   ngOnInit(): void {
     this.createFormHero();
@@ -61,20 +62,16 @@ export class HeroSelectionPageComponent implements OnInit {
       return;
     }
 
-    this.getStream();
     this.searchHeroes();
     this.createRecentSearches();
     this.formHero.reset();
   }
 
-  public getStream() {
-    this.results$ = this._heroSectionService.searchHeroes(this.formHero.value.searchInput);
-  }
-
-  public searchHeroes(): Subscription {
-      return this.results$
+  public searchHeroes(): void {
+      this._heroSectionService.searchHeroes(this.formHero.value.searchInput)
         .subscribe((response: HeroItem[]) => {
-        this._heroSectionService.foundedHeroes = response;
+          this._heroSectionService.foundedHeroes = response;
+          this._cd.markForCheck();
         });
   }
 
