@@ -17,7 +17,6 @@ export class HeroSelectionPageComponent implements OnInit {
   public formHero!: FormGroup;
   public isToggled: boolean = false;
   public recentSearches!: string[];
-  public results$!: Observable<HeroItem[]>
 
   public get searchInputControl(): AbstractControl {
     return this.formHero.controls.searchInput;
@@ -33,7 +32,7 @@ export class HeroSelectionPageComponent implements OnInit {
     private _cd: ChangeDetectorRef
     ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.createFormHero();
     this.initRecentSearches();
   }
