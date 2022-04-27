@@ -7,10 +7,10 @@
       type="text"
       placeholder="Enter your user name"
       formControlName="userName"
-      [class.invalid]="userNameControl.invalid && userNameControl.touched"
+      [class.invalid]="userNameControl.invalid && userNameControl.touched && userNameControl.dirty"
     >
 
-    <div *ngIf="formCreate.invalid && (userNameControl.dirty || userNameControl.touched)" class="errors">
+    <div *ngIf="formCreate.invalid && userNameControl.dirty && userNameControl.touched" class="errors">
       <small *ngIf="userNameControl.errors?.required">Empty user name</small>
       <small *ngIf="userNameControl.errors?.invalidUserName">Invalid user name</small>
     </div>
@@ -22,10 +22,10 @@
       type="email"
       placeholder="Enter your email"
       formControlName="login"
-      [class.invalid]="loginControl.invalid && loginControl.touched"
+      [class.invalid]="loginControl.invalid && loginControl.touched && loginControl.dirty"
     >
 
-    <div *ngIf="formCreate.invalid && (loginControl.dirty || loginControl.touched)" class="errors">
+    <div *ngIf="formCreate.invalid && loginControl.dirty && loginControl.touched" class="errors">
       <small *ngIf="loginControl.errors?.required">Empty email</small>
       <small *ngIf="loginControl.errors?.email">Invalid email</small>
       <small *ngIf="loginControl.errors?.notUniqueEmail">Not unique email</small>
@@ -39,10 +39,10 @@
       type="password"
       placeholder="Enter your password"
       formControlName="password"
-      [class.invalid]="passwordControl.invalid && passwordControl.touched"
+      [class.invalid]="passwordControl.invalid && passwordControl.touched && passwordControl.dirty"
     >
 
-    <div *ngIf="formCreate.invalid && (passwordControl.dirty || passwordControl.touched)" class="errors" >
+    <div *ngIf="formCreate.invalid && passwordControl.dirty && passwordControl.touched" class="errors" >
       <small *ngIf="passwordControl.errors?.required">Empty password</small>
       <small *ngIf="passwordControl.errors?.invalidPassword">Invalid password</small>
       <small *ngIf="passwordControl.errors?.minlength">

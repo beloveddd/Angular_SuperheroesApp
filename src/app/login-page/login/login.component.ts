@@ -66,6 +66,9 @@ export class LoginComponent implements OnInit {
 
     if (!this._userService.login(this.formLogin.value)) {
       this.isAuth = false;
+      this.formLogin.reset();
+
+      return;
     }
 
     this.formLogin.reset();

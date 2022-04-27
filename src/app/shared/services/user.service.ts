@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { User } from "../app.interfaces";
+import { HeroSelectionService } from "./hero-selecton.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class UserService {
   public users: User[] = localStorage.getItem(this.usersKey) ? JSON.parse(localStorage.getItem(this.usersKey)!) : [];
   public currentUser: User | undefined = localStorage.getItem(this.currentUserKey) ? JSON.parse(localStorage.getItem(this.currentUserKey)!) : {};
   public isLogged: boolean = true;
+
+  constructor(private _heroSelectionService: HeroSelectionService) { }
 
   public createUser(formLoginValue: Record<string, string>): void {
     const user: User = {
@@ -40,18 +43,25 @@ export class UserService {
     this.currentUser!.token = new Date();
     this.currentUser!.lifetime = new Date().getTime() + this.sessionTime;
     localStorage.setItem(this.currentUserKey, JSON.stringify(this.currentUser));
+
     return true;
   }
 
-  public checkAuth(): boolean | void {
-    if ( this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime()) ) {
+  public checkAuth(): boolean {
+    const expiredSession: number | boolean = this.currentUser?.lifetime! && (this.currentUser?.lifetime! > new Date().getTime())
+
+    if (expiredSession) {
       return false;
     }
 
     if (this.currentUser?.lifetime!) {
       this.isLogged = false;
       localStorage.removeItem(this.currentUserKey);
-      return true;
+      localStorage.removeItem(this._heroSelectionService.selectedHeroKey);
+      localStorage.removeItem(this._heroSelectionService.ownedHeroesKey);
+      localStorage.removeItem(this._heroSelectionService.recentSearchesKey);
     }
+
+    return true;
   }
 }
