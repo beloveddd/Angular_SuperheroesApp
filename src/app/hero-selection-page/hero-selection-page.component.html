@@ -1,13 +1,14 @@
 <div class="heroSelectionPage">
   <div class="searchContainer">
     <form [formGroup]="formHero" (ngSubmit)="submit()">
-      <button class="btn btn-alphabet" (click)="toggleAlphabet()">a</button>
+      <app-alphabet (onChange)="handleChange($event)" (onClickButton)="handleClickButton($event)"></app-alphabet>
       <input
         class ="searchInput"
         type="text"
         placeholder="Search heroes"
         formControlName="searchInput"
         [class.invalid]="searchInputControl.touched && searchInputControl.dirty && searchInputControl.invalid"
+        [value]="inputValue"
       >
 
       <div *ngIf="formHero.invalid && searchInputControl.dirty && searchInputControl.touched">
@@ -15,20 +16,18 @@
         <small *ngIf="searchInputControl.errors?.required" class="errors">Empty search value</small>
       </div>
 
-      <button class="btn-search" type="submit" [disabled]="formHero.invalid"><i class="searchIcon" class="fa-solid fa-magnifying-glass search"></i></button>
+      <button class="btn-search" type="submit" [disabled]="formHero.invalid"><i class="fa-solid fa-magnifying-glass search"></i></button>
     </form>
   </div>
 
   <div class="recentSearches">
     <div *ngFor="let recentSearch of recentSearches" class="recentSearch" >
-      {{recentSearch}}
+      {{ recentSearch }}
     </div>
   </div>
 
-  <div id="lettersContainer"></div>
-
   <div *ngIf="results.length" class="heroesList">
-    <p class="results">Results: {{results.length}}</p>
+    <p class="results">Results: {{ results.length }}</p>
 
     <app-hero-item
       *ngFor="let heroItem of results; trackBy: trackByFn"
@@ -37,6 +36,8 @@
     </app-hero-item>
 
   </div>
+
+  <div [class.modal-overlay]="isToggled"></div>
 
 </div>
 

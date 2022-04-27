@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { HeroSelectionService } from "../shared/services/hero-selecton.service";
@@ -17,6 +16,7 @@ export class HeroSelectionPageComponent implements OnInit {
   public formHero!: FormGroup;
   public isToggled: boolean = false;
   public recentSearches!: string[];
+  public inputValue: string | null = "";
 
   public get searchInputControl(): AbstractControl {
     return this.formHero.controls.searchInput;
@@ -30,7 +30,7 @@ export class HeroSelectionPageComponent implements OnInit {
     private _http: HttpClient,
     private _fb: FormBuilder,
     private _cd: ChangeDetectorRef
-    ) { }
+  ) { }
 
   public ngOnInit(): void {
     this.createFormHero();
@@ -79,8 +79,11 @@ export class HeroSelectionPageComponent implements OnInit {
     this.initRecentSearches();
   }
 
-  public toggleAlphabet(): void {
-    this.isToggled = !this.isToggled;
-    this.isToggled ? this._heroSectionService.createAlphabet() : this._heroSectionService.deleteAlphabet();
+  public handleChange(isToggled: boolean): void {
+    this.isToggled = isToggled;
+  }
+
+  public handleClickButton(buttonValue: string | null): void {
+    this.inputValue = buttonValue;
   }
 }

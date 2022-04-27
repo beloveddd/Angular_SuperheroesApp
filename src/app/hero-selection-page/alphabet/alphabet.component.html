@@ -1,0 +1,10 @@
+<button class="btn btn-alphabet" type="button" (click)="toggleAlphabet()">{{ circleValue }}</button>
+<div *ngIf="isToggled" id="lettersContainer">
+  <button
+    *ngFor="let letter of arrAlphabetEN; trackBy: trackByFn"
+    class="newLetter"
+    (click)="searchByLetter(letter)"
+    >
+    {{ letter }}
+  </button>
+</div>
