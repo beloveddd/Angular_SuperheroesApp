@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subscription } from "rxjs";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { HeroSelectionService } from "../shared/services/hero-selecton.service";
@@ -17,7 +16,6 @@ export class HeroSelectionPageComponent implements OnInit {
   public formHero!: FormGroup;
   public isToggled: boolean = false;
   public recentSearches!: string[];
-  public results$!: Observable<HeroItem[]>
 
   public get searchInputControl(): AbstractControl {
     return this.formHero.controls.searchInput;
@@ -33,7 +31,7 @@ export class HeroSelectionPageComponent implements OnInit {
     private _cd: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.createFormHero();
     this.initRecentSearches();
   }
@@ -62,14 +60,9 @@ export class HeroSelectionPageComponent implements OnInit {
       return;
     }
 
-    //this.getStream();
     this.searchHeroes();
     this.createRecentSearches();
     this.formHero.reset();
-  }
-
-  public getStream() {
-    this.results$ = this._heroSectionService.searchHeroes(this.formHero.value.searchInput);
   }
 
   public searchHeroes(): void {

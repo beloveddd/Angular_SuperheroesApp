@@ -40,13 +40,13 @@ export class AddValidators {
 
     if (!control.value.match(re)) {
       switch (true) {
-        case (re === AddValidators.regEmail):
+        case re === AddValidators.regEmail:
           return { invalidEmail: true };
-        case (re === AddValidators.regPassword):
+        case re === AddValidators.regPassword:
           return { invalidPassword: true };
-        case (re === AddValidators.regUserName):
+        case re === AddValidators.regUserName:
           return { invalidUserName: true };
-        case (re === AddValidators.regHeroSearch):
+        case re === AddValidators.regHeroSearch:
           return { invalidInputValue: true };
       }
     }

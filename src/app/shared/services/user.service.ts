@@ -43,6 +43,7 @@ export class UserService {
     this.currentUser!.token = new Date();
     this.currentUser!.lifetime = new Date().getTime() + this.sessionTime;
     localStorage.setItem(this.currentUserKey, JSON.stringify(this.currentUser));
+
     return true;
   }
 

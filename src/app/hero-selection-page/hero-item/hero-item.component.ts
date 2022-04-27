@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
