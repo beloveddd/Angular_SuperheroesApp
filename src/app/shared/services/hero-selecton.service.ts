@@ -50,7 +50,7 @@ export class HeroSelectionService {
       return;
     }
 
-    if (searchValue != null) {
+    if (searchValue) {
       this.recentSearches?.push(searchValue);
     }
 

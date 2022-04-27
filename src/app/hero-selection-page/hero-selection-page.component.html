@@ -22,12 +22,12 @@
 
   <div class="recentSearches">
     <div *ngFor="let recentSearch of recentSearches" class="recentSearch" >
-      {{recentSearch}}
+      {{ recentSearch }}
     </div>
   </div>
 
   <div *ngIf="results.length" class="heroesList">
-    <p class="results">Results: {{results.length}}</p>
+    <p class="results">Results: {{ results.length }}</p>
 
     <app-hero-item
       *ngFor="let heroItem of results; trackBy: trackByFn"

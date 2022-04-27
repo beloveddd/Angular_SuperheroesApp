@@ -25,28 +25,9 @@ export class AlphabetComponent {
     private _cd: ChangeDetectorRef
   ) { }
 
-  public createAlphabet(): void {
-     this.lettersContainer = document.querySelector('#lettersContainer');
-
-    this.arrAlphabetEN.forEach( (elem: string, index: number) => {
-        const newLetter: HTMLElement = document.createElement('button');
-
-        newLetter.className = this.newLetterClass;
-        newLetter.textContent = this.arrAlphabetEN[index];
-        this.lettersContainer!.append(newLetter);
-      }
-    )
-  }
-
-  public deleteAlphabet(): void {
-    this.lettersContainer!.innerHTML = '';
-  }
-
   public toggleAlphabet(): void {
     this.isToggled = !this.isToggled;
     this.onChange.emit(this.isToggled);
-
-    this.isToggled ? this.createAlphabet() : this.deleteAlphabet();
   }
 
   public searchByLetter(event: Event): void {
@@ -67,5 +48,9 @@ export class AlphabetComponent {
     this._heroSelectionService.createRecentSearches(buttonValue);
     this.toggleAlphabet();
     this.onClickButton.emit(buttonValue);
+  }
+
+  public trackByFn(index: number): number {
+    return index;
   }
 }
