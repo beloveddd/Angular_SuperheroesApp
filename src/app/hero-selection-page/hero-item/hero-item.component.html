@@ -4,14 +4,14 @@
   </div>
 
   <div class="heroDescription">
-    <h3>Name: {{heroItem.name}}</h3>
+    <h3>Name: {{ heroItem.name }}</h3>
     <div class="powestats">
-      <p>Intelligence: {{heroItem.powerstats.intelligence}}</p>
-      <p>Strength: {{heroItem.powerstats.strength}}</p>
-      <p>Speed: {{heroItem.powerstats.speed}}</p>
-      <p>Durability:{{heroItem.powerstats.durability}}</p>
-      <p>Power: {{heroItem.powerstats.power}}</p>
-      <p>Combat: {{heroItem.powerstats.combat}}</p>
+      <p>Intelligence: {{ heroItem.powerstats.intelligence }}</p>
+      <p>Strength: {{ heroItem.powerstats.strength }}</p>
+      <p>Speed: {{ heroItem.powerstats.speed }}</p>
+      <p>Durability:{{ heroItem.powerstats.durability }}</p>
+      <p>Power: {{ heroItem.powerstats.power }}</p>
+      <p>Combat: {{ heroItem.powerstats.combat }}</p>
     </div>
     <button class="btn btn-back" [disabled]="isSelected" (click)="select()">Select</button>
   </div>

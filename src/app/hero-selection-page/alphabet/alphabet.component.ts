@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-alphabet',
@@ -12,23 +12,23 @@ export class AlphabetComponent {
   public arrAlphabetEN: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   public newLetterClass: string = 'newLetter';
   public isToggled: boolean = false;
+  public lettersContainer!: HTMLElement | null;
 
   public createAlphabet(): void {
-    const lettersContainer: HTMLElement | null = document.querySelector('#lettersContainer');
+     this.lettersContainer = document.querySelector('#lettersContainer');
 
-    for (let i: number = 0; i < this.arrAlphabetEN.length; i++) {
-      const newLetter: HTMLElement = document.createElement('button');
+    this.arrAlphabetEN.forEach( (elem: string, index: number) => {
+        const newLetter: HTMLElement = document.createElement('button');
 
-      newLetter.className = this.newLetterClass;
-      newLetter.textContent = this.arrAlphabetEN[i];
-      lettersContainer!.append(newLetter);
-    }
+        newLetter.className = this.newLetterClass;
+        newLetter.textContent = this.arrAlphabetEN[index];
+        this.lettersContainer!.append(newLetter);
+      }
+    )
   }
 
   public deleteAlphabet(): void {
-    const lettersContainer: HTMLElement | null = document.querySelector('#lettersContainer');
-
-    lettersContainer!.innerHTML = '';
+    this.lettersContainer!.innerHTML = '';
   }
 
   public toggleAlphabet(): void {
@@ -38,7 +38,8 @@ export class AlphabetComponent {
     this.isToggled ? this.createAlphabet() : this.deleteAlphabet();
   }
 
-  public searchByLetter(): void {
-
+  public searchByLetter(event: Event): void {
+    // const evTarget: EventTarget | null = event.target;
+    // console.dir(evTarget.textContent)
   }
 }

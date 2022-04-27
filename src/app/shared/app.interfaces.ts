@@ -10,5 +10,9 @@ export interface HeroItem {
   image:  Record<string, string>
   id: number,
   name: string,
-  powerstats: Record<string, number>
+  powerstats: Record<string, string>
+}
+
+export interface Response {
+  results: HeroItem[]
 }

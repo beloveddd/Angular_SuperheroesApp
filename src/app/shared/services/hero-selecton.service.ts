@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 
-import { HeroItem } from "../app.interfaces";
+import { HeroItem, Response } from "../app.interfaces";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -14,18 +14,18 @@ export class HeroSelectionService {
   public ownedHeroesKey: string = 'ownedHeroes';
   public selectedHeroKey: string = 'selectedHero';
   public recentSearchesKey: string = 'recentSearches';
-  public foundedHeroes!: HeroItem[];
+  public foundedHeroes: HeroItem[] = [];
   public ownedHeroes: HeroItem[] = localStorage.getItem(this.ownedHeroesKey) ? JSON.parse(localStorage.getItem(this.ownedHeroesKey)!) : [];
   public selectedHero: HeroItem = localStorage.getItem(this.selectedHeroKey) ? JSON.parse(localStorage.getItem(this.selectedHeroKey)!) : {};
   public recentSearches: string[] = localStorage.getItem(this.recentSearchesKey) ? JSON.parse(localStorage.getItem(this.recentSearchesKey)!) : [];
 
   constructor(private _http: HttpClient) { }
 
-  public searchHeroes(searchValue: string): Observable<any> {
-      return this._http.get(this.urlAPI + searchValue)
+  public searchHeroes(searchValue: string): Observable<HeroItem[]> {
+      return this._http.get<Response>(this.urlAPI + searchValue)
         .pipe(
-          map( (responce: any) => {
-            const data = responce.results.filter( (elem: any) => elem.powerstats.power !== 'null');
+          map( (response: Response) => {
+            const data: HeroItem[] = response.results.filter( (elem: HeroItem) => elem.powerstats.power !== 'null');
 
             return data;
           })
@@ -44,7 +44,9 @@ export class HeroSelectionService {
   }
 
   public createRecentSearches(searchValue: string): void {
-    if (this.recentSearches.find( (elem) => elem === searchValue)) {
+    const matchingRecentSearch: string | undefined = this.recentSearches.find( (elem: string) => elem === searchValue);
+
+    if (matchingRecentSearch) {
       return;
     }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
@@ -7,7 +7,8 @@ import { HeroItem } from "../../shared/app.interfaces";
 @Component({
   selector: 'app-hero-item',
   templateUrl: './hero-item.component.html',
-  styleUrls: ['./hero-item.component.css']
+  styleUrls: ['./hero-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroItemComponent {
   @Input() heroItem!: HeroItem;
