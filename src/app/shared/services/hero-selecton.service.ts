@@ -21,7 +21,7 @@ export class HeroSelectionService {
 
   constructor(private _http: HttpClient) { }
 
-  public searchHeroes(searchValue: string): Observable<HeroItem[]> {
+  public searchHeroes(searchValue: string | null): Observable<HeroItem[]> {
       return this._http.get<Response>(this.urlAPI + searchValue)
         .pipe(
           map( (response: Response) => {
@@ -43,14 +43,17 @@ export class HeroSelectionService {
     localStorage.setItem(this.selectedHeroKey, JSON.stringify(this.selectedHero));
   }
 
-  public createRecentSearches(searchValue: string): void {
-    const matchingRecentSearch: string | undefined = this.recentSearches.find( (elem: string) => elem === searchValue);
+  public createRecentSearches(searchValue: string | null): void {
+    const matchingRecentSearch: string | undefined = this.recentSearches?.find( (elem: string) => elem === searchValue);
 
     if (matchingRecentSearch) {
       return;
     }
 
-    this.recentSearches.push(searchValue);
+    if (searchValue != null) {
+      this.recentSearches?.push(searchValue);
+    }
+
     localStorage.setItem(this.recentSearchesKey, JSON.stringify(this.recentSearches));
   }
 }

@@ -16,6 +16,7 @@ export class HeroSelectionPageComponent implements OnInit {
   public formHero!: FormGroup;
   public isToggled: boolean = false;
   public recentSearches!: string[];
+  public inputValue: string | null = "";
 
   public get searchInputControl(): AbstractControl {
     return this.formHero.controls.searchInput;
@@ -80,5 +81,9 @@ export class HeroSelectionPageComponent implements OnInit {
 
   public handleChange(isToggled: boolean): void {
     this.isToggled = isToggled;
+  }
+
+  public handleClickButton(buttonValue: string | null): void {
+    this.inputValue = buttonValue;
   }
 }

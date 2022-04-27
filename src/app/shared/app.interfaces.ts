@@ -16,7 +16,3 @@ export interface HeroItem {
 export interface Response {
   results: HeroItem[];
 }
-
-export interface Response {
-  results: HeroItem[]
-}
