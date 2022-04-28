@@ -1,4 +1,8 @@
 <div class="heroSelectionPage">
+  <div class="userInfo">
+    <button class="btn btn-user-info" routerLink="/user-info">User info</button>
+  </div>
+
   <div class="searchContainer">
     <form [formGroup]="formHero" (ngSubmit)="submit()">
       <app-alphabet (onChange)="handleChange($event)" (onClickButton)="handleClickButton($event)"></app-alphabet>

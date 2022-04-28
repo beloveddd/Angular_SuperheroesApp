@@ -10,6 +10,11 @@ import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection
 import { HeroItemComponent } from './hero-selection-page/hero-item/hero-item.component';
 import { AlphabetComponent } from "./hero-selection-page/alphabet/alphabet.component";
 import { CreateUserComponent } from "./login-page/create-user/create-user.component";
+import { UserInfoComponent } from './user-info-page/user-info-page.component';
+import { HeroesListComponent } from './user-info-page/heroes-list/heroes-list.component';
+import { BattlesHistoryComponent } from './user-info-page/battles-history/battles-history.component';
+import { PowerupsComponent } from "./user-info-page/powerups/powerups.component";
+;
 
 @NgModule({
   declarations: [
@@ -18,7 +23,11 @@ import { CreateUserComponent } from "./login-page/create-user/create-user.compon
     CreateUserComponent,
     HeroSelectionPageComponent,
     HeroItemComponent,
-    AlphabetComponent
+    AlphabetComponent,
+    UserInfoComponent,
+    HeroesListComponent,
+    BattlesHistoryComponent,
+    PowerupsComponent
   ],
   imports: [
     BrowserModule,

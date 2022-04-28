@@ -5,7 +5,6 @@ body {
   background: url("images/MarvelCharacterBlock.png") no-repeat fixed center;
   background-size: cover;
   margin: 0;
-  /*font-family: 'Bangers', cursive;*/
   font-family: 'Chivo', sans-serif;
   font-style: italic;
   font-weight: bold;
@@ -127,4 +126,9 @@ body {
 .newLetter:hover {
   background-color: rgba(255, 216, 0, 1);
   border-color: rgba(243, 54, 54, 0.8);
+}
+
+.btn-user-info {
+  border: none;
+  background-color: transparent;
 }
