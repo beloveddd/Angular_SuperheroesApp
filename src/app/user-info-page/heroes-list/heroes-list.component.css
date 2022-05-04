@@ -1,0 +1,48 @@
+.text {
+  text-align: center;
+}
+
+.container {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.message {
+  border: 1px solid rgba(19, 19, 19, 0.8);
+  background-color: rgba(255, 216, 0, 0.8);
+  margin: 15px auto;
+  border-radius: 10px;
+  padding: 10px;
+  width: 600px;
+}
+
+.btn-add {
+  height: 59px;
+  border: 1px solid rgba(19, 19, 19, 0.8);
+  border-radius: 10px;
+  padding: 10px 10px 12px 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.center {
+  margin: 0 auto;
+  display: block;
+}
+
+.right {
+  position: absolute;
+  top: 70%;
+  left: 86%;
+}
+
+.selectedHeroes {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}

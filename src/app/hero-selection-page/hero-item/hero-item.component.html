@@ -13,7 +13,9 @@
       <p>Power: {{ heroItem.powerstats.power }}</p>
       <p>Combat: {{ heroItem.powerstats.combat }}</p>
     </div>
-    <button class="btn btn-back" [disabled]="isSelected" (click)="select()">Select</button>
+    <button class="btn" [disabled]="heroItem.isSelected" (click)="select()">Select</button>
+    <button class="btn btn-back" [disabled]="!heroItem.isSelected" (click)="delete()">Remove</button>
+    <button class="btn btn-view">View Hero</button>
   </div>
 
 </div>

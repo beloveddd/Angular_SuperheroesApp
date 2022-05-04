@@ -25,12 +25,12 @@
   </div>
 
   <div class="recentSearches">
-    <div *ngFor="let recentSearch of recentSearches" class="recentSearch" >
+    <div *ngFor="let recentSearch of recentSearches" class="recentSearch">
       {{ recentSearch }}
     </div>
   </div>
 
-  <div *ngIf="results.length" class="heroesList">
+  <div *ngIf="results.length" class="heroesContainer">
     <p class="results">Results: {{ results.length }}</p>
 
     <app-hero-item

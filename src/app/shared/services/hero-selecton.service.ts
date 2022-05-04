@@ -27,7 +27,7 @@ export class HeroSelectionService {
           map( (response: Response) => {
             const data: HeroItem[] = response.results.filter( (elem: HeroItem) => elem.powerstats.power !== 'null');
 
-            return data;
+            return this.filterData(data);
           })
         );
   }
@@ -38,9 +38,18 @@ export class HeroSelectionService {
     this.saveToLocalStorage();
   }
 
+  public deleteHero(heroItem: HeroItem): void {
+    this.ownedHeroes = this.ownedHeroes.filter( (elem:HeroItem) => elem.id !== heroItem.id);
+    this.selectedHero = this.ownedHeroes[this.ownedHeroes.length-1];
+    this.saveToLocalStorage();
+  }
+
   public saveToLocalStorage(): void {
     localStorage.setItem(this.ownedHeroesKey, JSON.stringify(this.ownedHeroes));
-    localStorage.setItem(this.selectedHeroKey, JSON.stringify(this.selectedHero));
+
+    this.ownedHeroes.length ?
+      localStorage.setItem(this.selectedHeroKey, JSON.stringify(this.selectedHero)) :
+      localStorage.removeItem(this.selectedHeroKey);
   }
 
   public createRecentSearches(searchValue: string): void {
@@ -52,5 +61,23 @@ export class HeroSelectionService {
 
     this.recentSearches?.push(searchValue);
     localStorage.setItem(this.recentSearchesKey, JSON.stringify(this.recentSearches));
+  }
+
+  public filterData(data: HeroItem[]): HeroItem[]  {
+    const selectedHeroes: HeroItem[] = data.filter( (elem: HeroItem) => {
+      const selectedItem = this.ownedHeroes.find( (item: HeroItem) => item.id === elem.id);
+
+      return elem.id === selectedItem?.id;
+    });
+
+    if (selectedHeroes.length) {
+     data.map((elem: HeroItem) => {
+       if (selectedHeroes.includes(elem)) {
+         elem.isSelected = true;
+       }
+     });
+    }
+
+    return data;
   }
 }
