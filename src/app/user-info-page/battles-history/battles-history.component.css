@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table,
+.thead th {
+  border: 1px solid rgba(19, 19, 19, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 15px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.thead th {
+  background-color: rgba(255, 216, 0, 0.8);
+}
+
+.tbody th {
+  font-weight: normal;
+  font-style: normal;
+}
+
+.sort {
+  margin-left: 5px;
+  cursor: pointer;
+}
