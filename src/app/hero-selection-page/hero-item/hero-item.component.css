@@ -34,9 +34,19 @@
 .btn-view {
   position: absolute;
   top: 87%;
-  left: 89%;
+  left: 88%;
   font-size: 9px;
-  width: 50px;
+  width: 57px;
   height: 33px;
   background-color: transparent;
+}
+
+.btn-toggle {
+  position: absolute;
+  top: 0%;
+}
+
+.btn-selected {
+  cursor: auto;
+  background-color: rgba(243, 54, 54, 0.8);
 }
