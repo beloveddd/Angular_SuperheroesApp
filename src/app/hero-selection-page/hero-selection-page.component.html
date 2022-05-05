@@ -6,7 +6,8 @@
   <div class="searchContainer">
     <form [formGroup]="formHero" (ngSubmit)="submit()">
       <app-alphabet
-        (onChange)="handleChange($event)" (onClickButton)="handleClickButton($event)"></app-alphabet>
+        (onChange)="handleChange($event)"
+        (onClickButton)="handleClickButton($event)"></app-alphabet>
       <input
         class ="searchInput"
         type="text"

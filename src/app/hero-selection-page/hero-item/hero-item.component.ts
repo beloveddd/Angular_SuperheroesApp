@@ -11,14 +11,14 @@ export class HeroItemComponent {
   @Input() heroItem!: HeroItem;
   @Output() onDelete: EventEmitter<void> = new EventEmitter();
 
-  public get selectedHero(): HeroItem | void{
-    if (!this._heroSelectionService.selectedHero) {
+  public get selectedHero(): HeroItem | undefined {
+    const isSelected = this._heroSelectionService.selectedHero && this._heroSelectionService.selectedHero.id === this.heroItem.id;
+
+    if (!isSelected)  {
       return;
     }
 
-    if (this._heroSelectionService.selectedHero.id === this.heroItem.id)  {
-      return this._heroSelectionService.selectedHero;
-    }
+    return this._heroSelectionService.selectedHero;
   }
 
   constructor(private _heroSelectionService: HeroSelectionService) { }

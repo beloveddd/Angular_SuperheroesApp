@@ -71,7 +71,7 @@ export class HeroSelectionService {
     });
 
     if (selectedHeroes.length) {
-     data.map((elem: HeroItem) => {
+     data.forEach((elem: HeroItem) => {
        if (selectedHeroes.includes(elem)) {
          elem.isSelected = true;
        }
