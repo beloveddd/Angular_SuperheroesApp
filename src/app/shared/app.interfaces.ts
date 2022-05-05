@@ -11,6 +11,7 @@ export interface HeroItem {
   id: number;
   name: string;
   powerstats: Record<string, string>;
+  isSelected?: boolean;
 }
 
 export interface Response {

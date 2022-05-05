@@ -1,1 +1,29 @@
-<p>heroes-list works!</p>
+<div class="container">
+  <div *ngIf="!ownedHeroes.length; else selectedHeroes" class="text message">
+    <p>No selected Heroes</p>
+    <p>Click '+' to add new heroes</p>
+  </div>
+
+  <button
+    [ngClass]="{
+    center: !ownedHeroes.length,
+    right: ownedHeroes.length
+  }"
+    class="btn-add"
+    type="button"
+    routerLink="/"
+  >+</button>
+
+  <ng-template #selectedHeroes>
+    <div class="selectedHeroes">
+      <app-hero-item
+        *ngFor="let heroItem of ownedHeroes; trackBy: trackByFn"
+        [heroItem]="heroItem"
+        (onDelete)="handleDelete()"
+      >
+      </app-hero-item>
+    </div>
+  </ng-template>
+</div>
+
+

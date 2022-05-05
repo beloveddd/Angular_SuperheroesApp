@@ -5,7 +5,9 @@
 
   <div class="searchContainer">
     <form [formGroup]="formHero" (ngSubmit)="submit()">
-      <app-alphabet (onChange)="handleChange($event)" (onClickButton)="handleClickButton($event)"></app-alphabet>
+      <app-alphabet
+        (onChange)="handleChange($event)"
+        (onClickButton)="handleClickButton($event)"></app-alphabet>
       <input
         class ="searchInput"
         type="text"
@@ -25,12 +27,12 @@
   </div>
 
   <div class="recentSearches">
-    <div *ngFor="let recentSearch of recentSearches" class="recentSearch" >
+    <div *ngFor="let recentSearch of recentSearches" class="recentSearch">
       {{ recentSearch }}
     </div>
   </div>
 
-  <div *ngIf="results.length" class="heroesList">
+  <div *ngIf="results.length" class="heroesContainer">
     <p class="results">Results: {{ results.length }}</p>
 
     <app-hero-item
