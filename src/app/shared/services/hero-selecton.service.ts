@@ -71,10 +71,12 @@ export class HeroSelectionService {
     });
 
     if (selectedHeroes.length) {
-     data.forEach((elem: HeroItem) => {
+     data.forEach( (elem: HeroItem) => {
        if (selectedHeroes.includes(elem)) {
          elem.isSelected = true;
        }
+
+       elem.occupation = elem.work.occupation;
      });
     }
 

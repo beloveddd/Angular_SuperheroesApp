@@ -7,7 +7,7 @@ import { HeroSelectionPageComponent } from "./hero-selection-page/hero-selection
 import { UserInfoComponent } from "./user-info-page/user-info-page.component";
 import { HeroesListComponent } from "./user-info-page/heroes-list/heroes-list.component";
 import { BattlesHistoryComponent } from "./user-info-page/battles-history/battles-history.component";
-import { PowerupsComponent } from "./user-info-page/powerups/powerups.component";
+import { PowerUpsComponent } from "./user-info-page/powerups/powerups.component";
 
 const routes: Routes = [
   { path: '', component: HeroSelectionPageComponent},
@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: '', redirectTo:'heroes-list', pathMatch:'full'},
       { path: 'heroes-list', component: HeroesListComponent},
       { path: 'battles-history', component: BattlesHistoryComponent},
-      { path: 'powerups', component: PowerupsComponent},
+      { path: 'powerups', component: PowerUpsComponent},
     ]
   },
 ];

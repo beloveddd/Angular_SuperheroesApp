@@ -1,1 +1,18 @@
-<p>powerups works!</p>
+<div
+  *ngFor="let powerUpsItem of powerUpsData; trackBy: trackByFn"
+  [class.hasPowerUps] = "powerUpsItem.hasPowerUps"
+  class="powerItem"
+>
+  <div class="powerAvatar">
+    <img [src]="powerUpsItem.image" [alt]="powerUpsItem.title">
+  </div>
+
+  <div class="powerDescription">
+    <h3> {{ powerUpsItem.title }}</h3>
+    <div class="powerStats">
+      <p>Uses left: {{ powerUpsItem.usesLeft }}</p>
+      <p>{{ powerUpsItem.benefit }} : {{ powerUpsItem.value }}</p>
+    </div>
+  </div>
+
+</div>

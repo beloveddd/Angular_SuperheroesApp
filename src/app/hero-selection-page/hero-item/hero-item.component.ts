@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
 import { HeroItem } from "../../shared/app.interfaces";
+import { PowerUpsService } from "../../shared/services/powerUps.service";
 
 @Component({
   selector: 'app-hero-item',
@@ -21,7 +22,10 @@ export class HeroItemComponent {
     return this._heroSelectionService.selectedHero;
   }
 
-  constructor(private _heroSelectionService: HeroSelectionService) { }
+  constructor(
+    private _heroSelectionService: HeroSelectionService,
+    private _powerUpsService: PowerUpsService
+  ) { }
 
   public select(): void {
     this.heroItem.isSelected = true;
