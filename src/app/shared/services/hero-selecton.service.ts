@@ -25,7 +25,10 @@ export class HeroSelectionService {
       return this._http.get<Response>(this.urlAPI + searchValue)
         .pipe(
           map( (response: Response) => {
-            const data: HeroItem[] = response.results.filter( (elem: HeroItem) => elem.powerstats.power !== 'null');
+            const data: HeroItem[] = response.results.filter( (elem: HeroItem) => {
+              elem.occupation = elem.work.occupation;
+              return elem.powerstats.power !== 'null';
+            });
 
             return this.filterData(data);
           })
@@ -75,8 +78,6 @@ export class HeroSelectionService {
        if (selectedHeroes.includes(elem)) {
          elem.isSelected = true;
        }
-
-       elem.occupation = elem.work.occupation;
      });
     }
 
