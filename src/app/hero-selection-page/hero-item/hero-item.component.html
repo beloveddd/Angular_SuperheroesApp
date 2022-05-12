@@ -9,13 +9,13 @@
       <p>Intelligence: {{ heroItem.powerstats.intelligence }}</p>
       <p>Strength: {{ heroItem.powerstats.strength }}</p>
       <p>Speed: {{ heroItem.powerstats.speed }}</p>
-      <p>Durability:{{ heroItem.powerstats.durability }}</p>
+      <p>Durability: {{ heroItem.powerstats.durability }}</p>
       <p>Power: {{ heroItem.powerstats.power }}</p>
       <p>Combat: {{ heroItem.powerstats.combat }}</p>
     </div>
     <button class="btn" [disabled]="heroItem.isSelected" (click)="select()">Select</button>
     <button class="btn btn-back" [disabled]="!heroItem.isSelected" (click)="delete()">Remove</button>
-    <button class="btn btn-view">View Hero</button>
+    <button class="btn btn-view" (click)="searchHeroById(heroItem.id)">View Hero</button>
     <button *ngIf="heroItem.isSelected && !selectedHero" class="btn btn-view btn-toggle" (click)="toggleSelection()">Owned</button>
     <button *ngIf="heroItem.isSelected && selectedHero" class="btn btn-view btn-toggle btn-selected" disabled>Selected</button>
   </div>

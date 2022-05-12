@@ -8,6 +8,7 @@ import { UserInfoComponent } from "./user-info-page/user-info-page.component";
 import { HeroesListComponent } from "./user-info-page/heroes-list/heroes-list.component";
 import { BattlesHistoryComponent } from "./user-info-page/battles-history/battles-history.component";
 import { PowerUpsComponent } from "./user-info-page/powerups/powerups.component";
+import { HeroInfoPageComponent } from "./hero-info-page/hero-info-page.component";
 
 const routes: Routes = [
   { path: '', component: HeroSelectionPageComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'powerups', component: PowerUpsComponent},
     ]
   },
+  { path: 'hero-info', component: HeroInfoPageComponent},
 ];
 
 @NgModule({

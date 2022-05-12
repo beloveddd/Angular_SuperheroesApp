@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
 import { HeroItem } from "../../shared/app.interfaces";
 import { PowerUpsService } from "../../shared/services/powerUps.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-hero-item',
   templateUrl: './hero-item.component.html',
   styleUrls: ['./hero-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroItemComponent {
   @Input() heroItem!: HeroItem;
@@ -24,7 +26,9 @@ export class HeroItemComponent {
 
   constructor(
     private _heroSelectionService: HeroSelectionService,
-    private _powerUpsService: PowerUpsService
+    private _powerUpsService: PowerUpsService,
+    private _router: Router,
+    public _cd: ChangeDetectorRef
   ) { }
 
   public select(): void {
@@ -45,5 +49,9 @@ export class HeroItemComponent {
 
     this._heroSelectionService.selectedHero = this.heroItem;
     this._heroSelectionService.saveToLocalStorage();
+  }
+
+  public searchHeroById(id: number): void {
+    this._router.navigate(['/hero-info'], { queryParams: { id } });
   }
 }
