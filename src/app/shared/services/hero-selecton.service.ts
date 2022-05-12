@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { map } from 'rxjs/operators';
 
-import { HeroItem, Response } from "../app.interfaces";
+import { HeroItem, HeroItemFullInfo, Response } from "../app.interfaces";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroSelectionService {
-  public urlAPI: string = `https://superheroapi.com/api.php/${environment.idToken}/search/`;
+  public urlAPI: string = `https://superheroapi.com/api.php/${environment.idToken}/`;
+  public urlAPISearch: string = `${this.urlAPI}search/`;
   public ownedHeroesKey: string = 'ownedHeroes';
   public selectedHeroKey: string = 'selectedHero';
   public recentSearchesKey: string = 'recentSearches';
@@ -18,18 +19,27 @@ export class HeroSelectionService {
   public ownedHeroes: HeroItem[] = localStorage.getItem(this.ownedHeroesKey) ? JSON.parse(localStorage.getItem(this.ownedHeroesKey)!) : [];
   public selectedHero: HeroItem = localStorage.getItem(this.selectedHeroKey) ? JSON.parse(localStorage.getItem(this.selectedHeroKey)!) : {};
   public recentSearches: string[] = localStorage.getItem(this.recentSearchesKey) ? JSON.parse(localStorage.getItem(this.recentSearchesKey)!) : [];
+  public heroItemId!: number;
 
   constructor(private _http: HttpClient) { }
 
   public searchHeroes(searchValue: string): Observable<HeroItem[]> {
-      return this._http.get<Response>(this.urlAPI + searchValue)
+      return this._http.get<Response>(this.urlAPISearch + searchValue)
         .pipe(
           map( (response: Response) => {
-            const data: HeroItem[] = response.results.filter( (elem: HeroItem) => elem.powerstats.power !== 'null');
+            const data: HeroItem[] = response.results.filter( (elem: HeroItem) => {
+              elem.occupation = elem.work.occupation;
+
+              return elem.powerstats.power !== 'null';
+            });
 
             return this.filterData(data);
           })
         );
+  }
+
+  public searchHeroById(id: number): Observable<HeroItemFullInfo> {
+    return this._http.get<HeroItemFullInfo>(this.urlAPI + id);
   }
 
   public createHero(heroItem: HeroItem): void {
@@ -71,7 +81,7 @@ export class HeroSelectionService {
     });
 
     if (selectedHeroes.length) {
-     data.forEach((elem: HeroItem) => {
+     data.forEach( (elem: HeroItem) => {
        if (selectedHeroes.includes(elem)) {
          elem.isSelected = true;
        }

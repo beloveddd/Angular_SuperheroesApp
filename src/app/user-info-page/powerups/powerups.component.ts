@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PowerUpsService } from "../../shared/services/powerUps.service";
+import { PowerUpsItem } from "../../shared/app.interfaces";
+import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
 
 @Component({
   selector: 'app-powerups',
   templateUrl: './powerups.component.html',
-  styleUrls: ['./powerups.component.css']
+  styleUrls: ['./powerups.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PowerupsComponent implements OnInit {
+export class PowerUpsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public get powerUpsData(): PowerUpsItem[] {
+    return this._powerUpsService.powerUpsData;
   }
 
+  constructor(
+    private _powerUpsService: PowerUpsService,
+    private _heroSelectionService: HeroSelectionService,
+  ) { }
+
+  ngOnInit(): void {
+    this.checkPowerUps();
+  }
+
+  public checkPowerUps() {
+    this._powerUpsService.checkPowerUps();
+  }
+
+  public trackByFn(index: number): number {
+    return index;
+  }
 }
