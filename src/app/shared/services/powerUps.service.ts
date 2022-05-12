@@ -73,7 +73,7 @@ export class PowerUpsService {
         }
       });
 
-      this.powerUpsData.sort( (itemA: PowerUpsItem, itemB: PowerUpsItem) => itemA.hasPowerUps ? -1 : itemB.hasPowerUps ? 1: 0);
+      this.powerUpsData.sort( (itemA: PowerUpsItem, itemB: PowerUpsItem) => itemA.hasPowerUps ? -1 : itemB.hasPowerUps ? 1 : 0);
     }
   }
 }
