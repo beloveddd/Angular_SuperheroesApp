@@ -1,0 +1,61 @@
+<div *ngIf="heroItem" class="heroItem" >
+  <div class="heroAvatar">
+    <img [src]="heroItem.image.url" [alt]="heroItem.name">
+  </div>
+
+  <div class="fullInfo">
+    <div class="heroDescription">
+      <h3>Name: {{ heroItem.name }}</h3>
+      <div class="powestats">
+        <p>Intelligence: {{ heroItem.powerstats.intelligence }}</p>
+        <p>Strength: {{ heroItem.powerstats.strength }}</p>
+        <p>Speed: {{ heroItem.powerstats.speed }}</p>
+        <p>Durability: {{ heroItem.powerstats.durability }}</p>
+        <p>Power: {{ heroItem.powerstats.power }}</p>
+        <p>Combat: {{ heroItem.powerstats.combat }}</p>
+      </div>
+    </div>
+
+    <div class="heroDescription">
+      <h3>Biography</h3>
+      <div class="powestats">
+        <p>Full name: {{ heroItem.biography['full-name'] }}</p>
+        <p>Alter egos: {{ heroItem.biography['alter-egos'] }}</p>
+        <p>Aliases: {{ heroItem.biography.aliases[0] }}</p>
+        <p>Place of birth: {{ heroItem.biography['place-of-birth'] }}</p>
+        <p>First appearance: {{ heroItem.biography['first-appearance'] }}</p>
+        <p>Publisher: {{ heroItem.biography.publisher }}</p>
+        <p>Alignment: {{ heroItem.biography.alignment }}</p>
+      </div>
+    </div>
+
+    <div class="heroDescription">
+      <h3>Appearance</h3>
+      <div class="powestats">
+        <p>Gender: {{ heroItem.appearance.gender }}</p>
+        <p>Race: {{ heroItem.appearance.race }}</p>
+        <p>Height: {{ heroItem.appearance.height[1] }}</p>
+        <p>Weight: {{ heroItem.appearance.weight[1] }}</p>
+        <p>Eye color: {{ heroItem.appearance['eye-color'] }}</p>
+        <p>Hair color: {{ heroItem.appearance['hair-color'] }}</p>
+      </div>
+    </div>
+
+    <div class="heroDescription">
+      <h3>Work</h3>
+      <div class="powestats">
+        <p>Occupation: {{ heroItem.work.occupation }}</p>
+        <p>Base: {{ heroItem.work.base }}</p>
+      </div>
+    </div>
+
+    <div class="heroDescription">
+      <h3>Connections</h3>
+      <div class="powestats">
+        <p>Group affiliation: {{ heroItem.connections['group-affiliation'] }}</p>
+        <p>Relatives: {{ heroItem.connections.relatives }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
