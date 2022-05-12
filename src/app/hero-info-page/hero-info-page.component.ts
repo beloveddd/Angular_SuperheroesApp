@@ -27,10 +27,11 @@ export class HeroInfoPageComponent implements OnInit {
       this._heroSelectionService.heroItemId = params['id'];
       this._cd.markForCheck();
     } );
+
     this._heroSelectionService.searchHeroById(this._heroSelectionService.heroItemId)
       .subscribe((item: HeroItemFullInfo) => {
         this.heroItem = item;
         this._cd.markForCheck();
-      });
+    });
   }
 }

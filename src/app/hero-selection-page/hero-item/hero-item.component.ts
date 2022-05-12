@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
-import { HeroItem, HeroItemFullInfo } from "../../shared/app.interfaces";
+import { HeroItem } from "../../shared/app.interfaces";
 import { PowerUpsService } from "../../shared/services/powerUps.service";
 import { Router } from "@angular/router";
 
@@ -52,6 +52,6 @@ export class HeroItemComponent {
   }
 
   public searchHeroById(id: number): void {
-    this._router.navigate(['/hero-info'], { queryParams: { id } })
+    this._router.navigate(['/hero-info'], { queryParams: { id } });
   }
 }
