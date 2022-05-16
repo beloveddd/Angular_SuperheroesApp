@@ -35,27 +35,6 @@ export class LoginComponent implements OnInit {
     this._createForm();
   }
 
-  private _createForm(): void {
-    this.formLogin = this._fb.group( {
-      login: [
-        null, [
-        Validators.required,
-        Validators.email,
-        AddValidators.checkEmail
-        ]
-      ],
-      password: [
-        null, [
-        Validators.required,
-        Validators.minLength(5),
-        AddValidators.checkPassword
-        ]
-      ]
-    });
-
-    this.isLogged = this._userService.isLogged;
-  }
-
   public submit(): void {
     if (this.formLogin.invalid) {
       return;
@@ -73,5 +52,26 @@ export class LoginComponent implements OnInit {
 
     this.formLogin.reset();
     this._router.navigate(['/']);
+  }
+
+  private _createForm(): void {
+    this.formLogin = this._fb.group( {
+      login: [
+        null, [
+          Validators.required,
+          Validators.email,
+          AddValidators.checkEmail
+        ]
+      ],
+      password: [
+        null, [
+          Validators.required,
+          Validators.minLength(5),
+          AddValidators.checkPassword
+        ]
+      ]
+    });
+
+    this.isLogged = this._userService.isLogged;
   }
 }

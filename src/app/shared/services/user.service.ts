@@ -23,11 +23,11 @@ export class UserService {
       userName: formLoginValue.userName,
     }
 
-    this.users?.push(user);
-    this.setUsersToLocalStorage(user);
+    this.users.push(user);
+    this.setUsersToLocalStorage();
   }
 
-  public setUsersToLocalStorage(user: User): void {
+  public setUsersToLocalStorage(): void {
     localStorage.setItem(this.usersKey, JSON.stringify(this.users));
   }
 
@@ -54,14 +54,29 @@ export class UserService {
       return false;
     }
 
-    if (this.currentUser?.lifetime!) {
+    if (this.currentUser?.lifetime) {
       this.isLogged = false;
-      localStorage.removeItem(this.currentUserKey);
-      localStorage.removeItem(this._heroSelectionService.selectedHeroKey);
-      localStorage.removeItem(this._heroSelectionService.ownedHeroesKey);
-      localStorage.removeItem(this._heroSelectionService.recentSearchesKey);
     }
+
+    this._clearLocalStorage();
+    this._clearData();
 
     return true;
   }
+
+  private _clearLocalStorage(): void {
+    localStorage.removeItem(this.currentUserKey);
+    localStorage.removeItem(this._heroSelectionService.selectedHeroKey);
+    localStorage.removeItem(this._heroSelectionService.ownedHeroesKey);
+    localStorage.removeItem(this._heroSelectionService.recentSearchesKey);
+    localStorage.removeItem(this._heroSelectionService.battlesHistoryKey);
+  }
+
+  private _clearData(): void {
+    this._heroSelectionService.ownedHeroes.length = 0;
+    this._heroSelectionService.recentSearches.length = 0;
+    this._heroSelectionService.battlesHistory.length = 0;
+  }
 }
+
+

@@ -15,7 +15,7 @@ import { HeroesListComponent } from './user-info-page/heroes-list/heroes-list.co
 import { BattlesHistoryComponent } from './user-info-page/battles-history/battles-history.component';
 import { PowerUpsComponent } from "./user-info-page/powerups/powerups.component";
 import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
-;
+import { HeroesBattlePageComponent } from './heroes-battle-page/heroes-battle-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component
     HeroesListComponent,
     BattlesHistoryComponent,
     PowerUpsComponent,
-    HeroInfoPageComponent
+    HeroInfoPageComponent,
+    HeroesBattlePageComponent
   ],
   imports: [
     BrowserModule,

@@ -35,30 +35,6 @@ export class CreateUserComponent implements OnInit {
     this._createForm();
   }
 
-  public _createForm(): void {
-    this.formCreate = this._fb.group( {
-      userName: [
-        null, [
-        Validators.required,
-        AddValidators.checkUserName
-        ]
-      ],
-      login: [null, [
-        Validators.required,
-        Validators.email,
-        AddValidators.checkNewEmail(this._userService.users)
-        ]
-      ],
-      password: [
-        null,[
-        Validators.required,
-        Validators.minLength(5),
-        AddValidators.checkPassword
-        ]
-      ]
-    });
-  }
-
   public submit(): void {
     if (this.formCreate.invalid) {
       return;
@@ -66,5 +42,29 @@ export class CreateUserComponent implements OnInit {
 
     this._userService.createUser(this.formCreate.value);
     this._router.navigate(['/login']);
+  }
+
+  private _createForm(): void {
+    this.formCreate = this._fb.group( {
+      userName: [
+        null, [
+          Validators.required,
+          AddValidators.checkUserName
+        ]
+      ],
+      login: [null, [
+        Validators.required,
+        Validators.email,
+        AddValidators.checkNewEmail(this._userService.users)
+      ]
+      ],
+      password: [
+        null,[
+          Validators.required,
+          Validators.minLength(5),
+          AddValidators.checkPassword
+        ]
+      ]
+    });
   }
 }

@@ -1,3 +1,7 @@
-<h1 class="title">Your superheroes</h1>
+<div class="title">
+  <p routerLink="/">Your Superheroes</p>
+  <p *ngIf="possibleToFight" routerLink="/heroes-battle">Fight!</p>
+</div>
+
 
 <router-outlet></router-outlet>

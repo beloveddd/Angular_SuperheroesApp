@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
 import { PowerUpsService } from "../../shared/services/powerUps.service";
 import { PowerUpsItem } from "../../shared/app.interfaces";
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
@@ -21,14 +22,16 @@ export class PowerUpsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkPowerUps();
-  }
-
-  public checkPowerUps() {
-    this._powerUpsService.checkPowerUps();
+    this._checkPowerUps();
   }
 
   public trackByFn(index: number): number {
     return index;
+  }
+
+  private _checkPowerUps(): void {
+    if (this._heroSelectionService.ownedHeroes.length) {
+      this._powerUpsService.checkPowerUps();
+    }
   }
 }

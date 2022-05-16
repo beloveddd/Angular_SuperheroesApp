@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from "@angular/router";
+
 import { HeroSelectionService } from "../../shared/services/hero-selecton.service";
 import { HeroItem } from "../../shared/app.interfaces";
 import { PowerUpsService } from "../../shared/services/powerUps.service";
-import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-hero-item',
   templateUrl: './hero-item.component.html',
-  styleUrls: ['./hero-item.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./hero-item.component.css']
 })
 export class HeroItemComponent {
   @Input() heroItem!: HeroItem;
@@ -20,15 +21,13 @@ export class HeroItemComponent {
     if (!isSelected)  {
       return;
     }
-
     return this._heroSelectionService.selectedHero;
   }
 
   constructor(
     private _heroSelectionService: HeroSelectionService,
     private _powerUpsService: PowerUpsService,
-    private _router: Router,
-    public _cd: ChangeDetectorRef
+    private _router: Router
   ) { }
 
   public select(): void {

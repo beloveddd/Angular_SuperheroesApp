@@ -10,7 +10,7 @@ export interface HeroItem {
   image:  Image;
   id: number;
   name: string;
-  powerstats: PowerStats;
+  powerstats: Record<string, string>;
   isSelected?: boolean;
   occupation: string;
   work: Work;
@@ -27,15 +27,6 @@ export interface PowerUpsItem {
   image: string;
   usesLeft: number;
   hasPowerUps?: boolean;
-}
-
-export interface PowerStats {
-  intelligence: string;
-  strength: string;
-  speed: string;
-  durability: string;
-  power: string;
-  combat: string;
 }
 
 export interface Biography {
@@ -75,9 +66,18 @@ export interface HeroItemFullInfo {
   image: Image;
   id: number;
   name: string;
-  powerstats: PowerStats;
+  powerstats: Record<string, string>;
   biography: Biography;
   appearance: Appearance;
   work: Work;
   connections: Connections;
+}
+
+export interface Battle {
+  battleTime: Date;
+  myHeroId: number;
+  myHero: string;
+  opponentHeroId: number;
+  opponentHero: string;
+  result: string;
 }

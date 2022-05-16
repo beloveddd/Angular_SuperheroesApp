@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+
 import { HeroSelectionService } from "../shared/services/hero-selecton.service";
 import { HeroItemFullInfo } from "../shared/app.interfaces";
-import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: 'app-hero-info-page',

@@ -4,28 +4,28 @@
       <tr>
         <th>
           Battle time
-          <i class="fa-solid fa-arrow-down-up-across-line sort"></i>
+          <i class="fa-solid fa-arrow-down-1-9 sort" (click)="sort('Battle time')"></i>
         </th>
         <th>
           Hero name
-          <i class="fa-solid fa-arrow-down-up-across-line sort"></i>
+          <i class="fa-solid fa-arrow-down-a-z sort" (click)="sort('Hero name')"></i>
         </th>
         <th>
           Opponent name
-          <i class="fa-solid fa-arrow-down-up-across-line sort"></i>
+          <i class="fa-solid fa-arrow-down-a-z sort" (click)="sort('Opponent name')"></i>
         </th>
         <th>
           Battle result
-          <i class="fa-solid fa-arrow-down-up-across-line sort"></i>
+          <i class="fa-solid fa-arrow-down-a-z sort" (click)="sort('Battle result')"></i>
         </th>
       </tr>
     </thead>
     <tbody class="tbody">
-      <tr>
-        <th>Battle time</th>
-        <th>Hero name</th>
-        <th>Opponent name</th>
-        <th>Battle result</th>
+      <tr *ngFor="let battle of battlesList">
+        <th>{{ battle.battleTime | date:'d/M/yy, h:mm a'}}</th>
+        <th class="pointer" (click)="searchHeroById(battle.myHeroId)">{{ battle.myHero }}</th>
+        <th class="pointer" (click)="searchHeroById(battle.opponentHeroId)">{{ battle.opponentHero }}</th>
+        <th>{{ battle.result }}</th>
       </tr>
     </tbody>
   </table>
