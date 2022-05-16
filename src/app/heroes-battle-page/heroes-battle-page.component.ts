@@ -22,7 +22,7 @@ export class HeroesBattlePageComponent implements OnInit {
   public battleTime!: Date;
   public result!: string;
 
-  get powerUpsData(): PowerUpsItem[] {
+  public get powerUpsData(): PowerUpsItem[] {
     return this._powerUpsService.powerUpsData;
   }
 

@@ -32,8 +32,9 @@ body {
 
 .title p:last-child {
   position: absolute;
-  top: 17%;
-  left: 48%;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 .form {

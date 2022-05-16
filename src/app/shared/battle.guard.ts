@@ -13,7 +13,6 @@ export class BattleGuard implements CanActivate {
   constructor(private _heroSelectionService: HeroSelectionService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this._heroSelectionService.ownedHeroes.length > 1 ? true : false;
+    return this._heroSelectionService.ownedHeroes.length > 1;
   }
-
 }

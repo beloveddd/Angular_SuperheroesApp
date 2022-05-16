@@ -11,6 +11,7 @@ import { Battle } from "../../shared/app.interfaces";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BattlesHistoryComponent {
+  public tableNames: string[] = ['Battle time', 'Hero name', 'Opponent name', 'Battle result'];
 
   public get battlesList(): Battle[] {
     return this._heroSelectionService.battlesHistory;
@@ -27,16 +28,16 @@ export class BattlesHistoryComponent {
 
   public sort(value: string): void {
     switch (true) {
-      case value === 'Battle time':
+      case value === this.tableNames[0]:
         this.battlesList.sort( (a: Battle, b: Battle) =>  new Date(a.battleTime).getTime() - new Date(b.battleTime).getTime());
         break;
-      case value === 'Hero name':
+      case value === this.tableNames[1]:
         this.battlesList.sort( (a: Battle, b: Battle) =>  a.myHero.localeCompare(b.myHero));
         break;
-      case value === 'Opponent name':
+      case value === this.tableNames[2]:
         this.battlesList.sort( (a: Battle, b: Battle) =>  a.opponentHero.localeCompare(b.opponentHero));
         break;
-      case value === 'Battle result':
+      case value === this.tableNames[3]:
         this.battlesList.sort( (a: Battle, b: Battle) =>  b.result.localeCompare(a.result));
         break;
     }
