@@ -119,6 +119,7 @@ export class HeroesBattlePageComponent implements OnInit {
   }
 
   private _renderHeroes(): void {
+    this._powerUpsService.powerUpsData.forEach( (elem:PowerUpsItem) => elem.usesLeft = this._powerUpsService.usesLeft);
     this.myHero = this._heroSelectionService.selectedHero;
     this.opponentHero = this._heroSelectionService.ownedHeroes[this._heroSelectionService.getRandomIndex(0, this._heroSelectionService.ownedHeroes.length-1)];
 
