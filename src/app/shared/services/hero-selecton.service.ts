@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 
-import { HeroItem, HeroItemFullInfo, Response } from "../app.interfaces";
+import { Battle, HeroItem, HeroItemFullInfo, Response } from "../app.interfaces";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -15,16 +15,18 @@ export class HeroSelectionService {
   public ownedHeroesKey: string = 'ownedHeroes';
   public selectedHeroKey: string = 'selectedHero';
   public recentSearchesKey: string = 'recentSearches';
+  public battlesHistoryKey: string = 'battles';
   public foundedHeroes: HeroItem[] = [];
   public ownedHeroes: HeroItem[] = localStorage.getItem(this.ownedHeroesKey) ? JSON.parse(localStorage.getItem(this.ownedHeroesKey)!) : [];
   public selectedHero: HeroItem = localStorage.getItem(this.selectedHeroKey) ? JSON.parse(localStorage.getItem(this.selectedHeroKey)!) : {};
   public recentSearches: string[] = localStorage.getItem(this.recentSearchesKey) ? JSON.parse(localStorage.getItem(this.recentSearchesKey)!) : [];
   public heroItemId!: number;
+  public battlesHistory: Battle[] = localStorage.getItem(this.battlesHistoryKey) ? JSON.parse(localStorage.getItem(this.battlesHistoryKey)!) : [];
 
   constructor(private _http: HttpClient) { }
 
   public searchHeroes(searchValue: string): Observable<HeroItem[]> {
-      return this._http.get<Response>(this.urlAPISearch + searchValue)
+    return this._http.get<Response>(this.urlAPISearch + searchValue)
         .pipe(
           map( (response: Response) => {
             const data: HeroItem[] = response.results.filter( (elem: HeroItem) => {
@@ -89,5 +91,9 @@ export class HeroSelectionService {
     }
 
     return data;
+  }
+
+  public getRandomIndex(min: number, max: number) {
+    return Math.round(Math.random() * (max - min) + min);
   }
 }

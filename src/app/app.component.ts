@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { UserService } from "./shared/services/user.service";
+import { HeroSelectionService } from "./shared/services/hero-selecton.service";
 
 @Component({
   selector: 'app-root',
@@ -12,20 +13,27 @@ import { UserService } from "./shared/services/user.service";
 export class AppComponent implements OnInit {
   public title: string = 'superHeroesApp';
 
+  get possibleToFight(): boolean {
+    if (this._heroSelectionService.ownedHeroes.length > 1) {
+      return true;
+    }
+
+    return false;
+  }
+
   constructor(
     private _router: Router,
-    private _userService: UserService)
+    private _userService: UserService,
+    private _heroSelectionService: HeroSelectionService)
   { }
 
   public ngOnInit(): void {
-    this.checkAuth();
+    this._checkAuth();
   }
 
-  public checkAuth(): void {
-    if (!this._userService.checkAuth()) {
-      return;
+  private _checkAuth(): void {
+    if (this._userService.checkAuth()) {
+      this._router.navigate(['/login']);
     }
-
-    this._router.navigate(['/login']);
   }
 }

@@ -1,0 +1,97 @@
+<div class="container">
+
+  <div class="myHero">
+    <div class="heroItem">
+      <div class="heroAvatar">
+        <img [src]="myHero.image.url" [alt]="myHero.name" (click)="searchHeroById(myHero.id)">
+      </div>
+
+      <div class="heroDescription">
+        <h3>Name: {{ myHero.name }}</h3>
+        <div class="powestats">
+          <p>Intelligence: {{ myHero.powerstats.intelligence }}</p>
+          <p>Strength: {{ myHero.powerstats.strength }}</p>
+          <p>Speed: {{ myHero.powerstats.speed }}</p>
+          <p>Durability: {{ myHero.powerstats.durability }}</p>
+          <p>Power: {{ myHero.powerstats.power }}</p>
+          <p>Combat: {{ myHero.powerstats.combat }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="myHero fight">
+    <h3>My hero: {{ myHero.name }}</h3>
+    <button type="button" class="btn btn-back" (click)="fightHeroes()">Fight</button>
+    <h3>Opponent hero: {{ opponentHero.name }}</h3>
+
+    <div class="btns">
+      <button *ngFor="let button of powerUpsData"
+        type="button"
+        class="btn btn-powerUps"
+        (click)="usePowerUps(button.benefit, button.value, button.title)"
+      >
+        {{ button.title }} (Uses Left: {{ button.usesLeft}} )
+      </button>
+    </div>
+
+  </div>
+
+  <div class="myHero opponentHero">
+    <div class="heroItem">
+      <div class="heroAvatar">
+        <img [src]="opponentHero.image.url" [alt]="opponentHero.name" (click)="searchHeroById(opponentHero.id)">
+      </div>
+
+      <div class="heroDescription">
+        <h3>Name: {{ opponentHero.name }}</h3>
+        <div class="powestats">
+          <p>Intelligence: {{ opponentHero.powerstats.intelligence }}</p>
+          <p>Strength: {{ opponentHero.powerstats.strength }}</p>
+          <p>Speed: {{ opponentHero.powerstats.speed }}</p>
+          <p>Durability: {{ opponentHero.powerstats.durability }}</p>
+          <p>Power: {{ opponentHero.powerstats.power }}</p>
+          <p>Combat: {{ opponentHero.powerstats.combat }}</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+  <div *ngIf="isToggled && winnerHero">
+    <div class="modal-overlay"></div>
+    <div class="myHero modal">
+      <div class="heroItem">
+        <div class="heroDescription">
+          <p>Winner: {{ winnerHero.name }}</p>
+
+          <div class="heroAvatarWinner">
+            <img [src]="winnerHero.image.url" [alt]="winnerHero.name">
+          </div>
+
+          <p>Battle Time: {{ battleTime | date:'d/M/yy, h:mm a' }}</p>
+          <p>My Hero: {{ myHero.name }}</p>
+          <p>Opponent Hero: {{ opponentHero.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="inDraw">
+    <div class="modal-overlay"></div>
+    <div class="myHero modal">
+      <div class="heroItem">
+        <div class="heroDescription">
+          <p>The battle ended in a draw.</p>
+          <p>Battle Time: {{ battleTime | date:'d/M/yy, h:mm a' }}</p>
+          <p>My Hero: {{ myHero.name }}</p>
+          <p>Opponent Hero: {{ opponentHero.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isToggled && !winnerHero || inProcess && !inDraw">
+    <div class="spinner"></div>
+  </div>
+
+</div>

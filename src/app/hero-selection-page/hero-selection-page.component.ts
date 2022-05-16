@@ -33,27 +33,12 @@ export class HeroSelectionPageComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.createFormHero();
-    this.initRecentSearches();
-  }
-
-  public createFormHero(): void {
-    this.formHero = this._fb.group({
-      searchInput: [
-        null, [
-          Validators.required,
-          AddValidators.checkHeroInput
-        ]
-      ]
-    })
+    this._createFormHero();
+    this._initRecentSearches();
   }
 
   public trackByFn(index: number, item: HeroItem): number {
     return item.id;
-  }
-
-  public initRecentSearches(): void {
-    this.recentSearches = this._heroSectionService.recentSearches;
   }
 
   public submit(): void {
@@ -62,21 +47,24 @@ export class HeroSelectionPageComponent implements OnInit {
     }
 
     this.searchHeroes();
-    this.createRecentSearches();
     this.formHero.reset();
+
+    if (this.results.length) {
+      this._createRecentSearches();
+    }
   }
 
   public searchHeroes(): void {
-      this._heroSectionService.searchHeroes(this.formHero.value.searchInput)
+    this.results.length = 0;
+
+    this._heroSectionService.searchHeroes(this.formHero.value.searchInput)
         .subscribe((response: HeroItem[]) => {
           this._heroSectionService.foundedHeroes = response;
           this._cd.markForCheck();
-        });
-  }
-
-  public createRecentSearches(): void {
-    this._heroSectionService.createRecentSearches(this.formHero.value.searchInput);
-    this.initRecentSearches();
+        },
+          (error) => {
+            console.log(error.message);
+          });
   }
 
   public handleChange(isToggled: boolean): void {
@@ -85,5 +73,25 @@ export class HeroSelectionPageComponent implements OnInit {
 
   public handleClickButton(buttonValue: string | null): void {
     this.inputValue = buttonValue;
+  }
+
+  private _createFormHero(): void {
+    this.formHero = this._fb.group({
+      searchInput: [
+        null, [
+          Validators.required,
+          AddValidators.checkHeroInput
+        ]
+      ]
+    });
+  }
+
+  private _initRecentSearches(): void {
+    this.recentSearches = this._heroSectionService.recentSearches;
+  }
+
+  private _createRecentSearches(): void {
+    this._heroSectionService.createRecentSearches(this.formHero.value.searchInput);
+    this._initRecentSearches();
   }
 }

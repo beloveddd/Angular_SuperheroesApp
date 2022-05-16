@@ -26,3 +26,11 @@
   margin-left: 5px;
   cursor: pointer;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  color: rgba(19, 19, 19, 0.8);
+}
