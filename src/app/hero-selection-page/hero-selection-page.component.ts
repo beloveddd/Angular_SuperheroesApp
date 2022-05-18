@@ -47,11 +47,6 @@ export class HeroSelectionPageComponent implements OnInit {
     }
 
     this.searchHeroes();
-    this.formHero.reset();
-
-    if (this.results.length) {
-      this._createRecentSearches();
-    }
   }
 
   public searchHeroes(): void {
@@ -61,7 +56,13 @@ export class HeroSelectionPageComponent implements OnInit {
         .subscribe((response: HeroItem[]) => {
           this._heroSectionService.foundedHeroes = response;
           this._cd.markForCheck();
-        },
+
+          if (this.results.length) {
+            this._createRecentSearches();
+          }
+
+          this.formHero.reset();
+          },
           (error) => {
             console.log(error.message);
           });
