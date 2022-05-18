@@ -13,7 +13,7 @@ import { HeroSelectionService } from "./shared/services/hero-selecton.service";
 export class AppComponent implements OnInit {
   public title: string = 'superHeroesApp';
 
-  get possibleToFight(): boolean {
+  public get possibleToFight(): boolean {
     if (this._heroSelectionService.ownedHeroes.length > 1) {
       return true;
     }
